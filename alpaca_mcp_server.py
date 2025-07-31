@@ -171,6 +171,17 @@ option_historical_data_client = OptionHistoricalDataClientSigned(api_key=TRADE_A
 corporate_actions_client = CorporateActionsClientSigned(api_key=TRADE_API_KEY, secret_key=TRADE_API_SECRET)
 
 # ============================================================================
+# Healthcheck
+# ============================================================================
+@mcp.server.get("/up")
+def healthcheck():
+    """
+    A simple healthcheck endpoint that returns a 200 OK response.
+    """
+    return {"status": "ok"}
+
+
+# ============================================================================
 # Account Information Tools
 # ============================================================================
 
