@@ -322,7 +322,8 @@ async def get_stock_bars(
     timeframe: str = "1Day",
     limit: Optional[int] = None,
     start: Optional[str] = None,
-    end: Optional[str] = None
+    end: Optional[str] = None,
+    feed: Optional[DataFeed] = "iex"
 ) -> str:
     """
     Retrieves and formats historical price bars for a stock with configurable timeframe and time range.
@@ -340,6 +341,14 @@ async def get_stock_bars(
         limit (Optional[int]): Maximum number of bars to return (optional)
         start (Optional[str]): Start time in ISO format (e.g., "2023-01-01T09:30:00" or "2023-01-01")
         end (Optional[str]): End time in ISO format (e.g., "2023-01-01T16:00:00" or "2023-01-01")
+        feed (Optional[DataFeed]): The stock data feed to retrieve from. Supported feeds:
+            - "iex": Investors EXchange (default; recommended for most users)
+            - "sip": all US exchanges (premium only)
+            - "delayed_sip": SIP with a 15 minute delay
+            - "boats": Blue Ocean, overnight US trading data
+            - "overnight": derived overnight US trading data
+            - "otc": over-the-counter exchanges
+            (default: "iex"; use "sip" only if you have a premium subscription, otherwise use "iex")
     
     Returns:
         str: Formatted string containing historical price data with timestamps, OHLCV data
@@ -387,7 +396,8 @@ async def get_stock_bars(
             timeframe=timeframe_obj,
             start=start_time,
             end=end_time,
-            limit=limit
+            limit=limit,
+            feed=feed,
         )
         
         bars = stock_historical_data_client.get_stock_bars(request_params)
