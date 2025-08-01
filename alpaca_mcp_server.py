@@ -323,7 +323,7 @@ async def get_stock_bars(
     limit: Optional[int] = None,
     start: Optional[str] = None,
     end: Optional[str] = None,
-    feed: Optional[DataFeed] = "iex"
+    feed: Optional[DataFeed] = "delayed_sip"
 ) -> str:
     """
     Retrieves and formats historical price bars for a stock with configurable timeframe and time range.
@@ -342,13 +342,13 @@ async def get_stock_bars(
         start (Optional[str]): Start time in ISO format (e.g., "2023-01-01T09:30:00" or "2023-01-01")
         end (Optional[str]): End time in ISO format (e.g., "2023-01-01T16:00:00" or "2023-01-01")
         feed (Optional[DataFeed]): The stock data feed to retrieve from. Supported feeds:
-            - "iex": Investors EXchange (default; recommended for most users)
+            - "delayed_sip": SIP with a 15 minute delay (default; recommended for most users)
+            - "iex": Investors EXchange
             - "sip": all US exchanges (premium only)
-            - "delayed_sip": SIP with a 15 minute delay
             - "boats": Blue Ocean, overnight US trading data
             - "overnight": derived overnight US trading data
             - "otc": over-the-counter exchanges
-            (default: "iex"; use "sip" only if you have a premium subscription, otherwise use "iex")
+            (default: "delayed_sip"; use "sip" only if you have a premium subscription, otherwise use "delayed_sip")
     
     Returns:
         str: Formatted string containing historical price data with timestamps, OHLCV data
