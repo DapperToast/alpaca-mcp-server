@@ -323,7 +323,7 @@ async def get_stock_bars(
     limit: Optional[int] = None,
     start: Optional[str] = None,
     end: Optional[str] = None,
-    feed: Optional[DataFeed] = "delayed_sip"
+    feed: Optional[DataFeed] = "iex"
 ) -> str:
     """
     Retrieves and formats historical price bars for a stock with configurable timeframe and time range.
